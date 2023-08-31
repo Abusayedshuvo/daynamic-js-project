@@ -22,19 +22,28 @@ const singleData = async () => {
   );
   const data = await response.json();
   const singleData = data.data;
-  console.log(singleData);
-
   const cardContainer = document.getElementById("cards");
   singleData.forEach((card) => {
-    console.log(card.authors[0].verified);
+    console.log(card);
     const div = document.createElement("div");
     div.classList = `single-card`;
     div.innerHTML = `
+    <div class="relative"> 
     <img src="${card.thumbnail}" alt="">
-    <div class="flex pt-8">
+    <span>${
+      card.others.posted_date
+        ? `<span class="bg-black rounded-lg p-2 text-white absolute text-sm right-4 bottom-4">${
+            secToHour(card.others.posted_date).hrs
+          }hrs  
+    ${secToHour(card.others.posted_date).min} min ago</span>`
+        : ""
+    }</span>
+    
+     </div>
+    <div class="flex pt-8"> 
         <img class="w-16 h-16 rounded-full" src="${
           card.authors[0].profile_picture
-        }" alt="Author">
+        }" alt="Author"> 
         <div class="ps-4">
             <h2 class="font-bold text-lg">${card.title}</h2>
             <div class="flex">
@@ -51,6 +60,13 @@ const singleData = async () => {
     `;
     cardContainer.appendChild(div);
   });
+};
+
+const secToHour = (totalSeconds) => {
+  const totalMin = Math.floor(totalSeconds / 60);
+  const hour = Math.floor(totalMin / 60);
+  const minutes = totalMin % 60;
+  return { hrs: hour, min: minutes };
 };
 
 singleData();
