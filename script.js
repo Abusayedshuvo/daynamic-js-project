@@ -7,24 +7,23 @@ const getCategories = async () => {
   const categories = data.data;
   const tabs = document.getElementById("tabs");
   categories.forEach((category) => {
-    const a = document.createElement("button");
-    a.classList = `btn mx-4 active:bg-rose-500`;
-    a.innerText = `${category.category}`;
-    tabs.appendChild(a);
+    const span = document.createElement("span");
+    span.innerHTML = `<button onclick="singleData('${category.category_id}')" class="btn mx-4 active:bg-rose-500"> ${category.category} </button>`;
+    tabs.appendChild(span);
     // console.log(category);
   });
 };
 
 // get single data from API
-const singleData = async () => {
+const singleData = async (id) => {
   const response = await fetch(
-    "https://openapi.programming-hero.com/api/videos/category/1000"
+    `https://openapi.programming-hero.com/api/videos/category/${id}`
   );
   const data = await response.json();
   const singleData = data.data;
   const cardContainer = document.getElementById("cards");
+  cardContainer.innerHTML = "";
   singleData.forEach((card) => {
-    console.log(card);
     const div = document.createElement("div");
     div.classList = `single-card`;
     div.innerHTML = `
@@ -62,6 +61,7 @@ const singleData = async () => {
   });
 };
 
+// Second to hour and Minutes
 const secToHour = (totalSeconds) => {
   const totalMin = Math.floor(totalSeconds / 60);
   const hour = Math.floor(totalMin / 60);
@@ -69,5 +69,5 @@ const secToHour = (totalSeconds) => {
   return { hrs: hour, min: minutes };
 };
 
-singleData();
+singleData("1000");
 getCategories();
