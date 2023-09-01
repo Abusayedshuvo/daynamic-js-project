@@ -40,10 +40,10 @@ const singleData = async (id, button) => {
     catData.sort((a, b) => {
       let aViews = nFormat(a.others.views);
       let bViews = nFormat(b.others.views);
-      if (aViews > bViews) {
+      if (aViews < bViews) {
         return 1;
       }
-      if (aViews < bViews) {
+      if (aViews > bViews) {
         return -1;
       }
       return 0;

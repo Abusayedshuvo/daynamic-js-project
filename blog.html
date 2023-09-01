@@ -33,7 +33,50 @@
     </header>
 
     <main class="px-8 lg:px-0">
+        <div class="container mx-auto py-10">
+            <h2 class="text-4xl font-semibold mb-5">01. Discuss the scope of var, let, and const </h2>
+            <p class="pb-4">In the javaScript have 3 way to declare a variable. 1. var, 2. let, 3. const. They have
+                different
+                behavior. Let's discuss this.</p>
+            <p><b>var:</b> var is one way to declare a variable. This syntax is easy. Like <b> var name = value; .</b>
+                <br> var is function scope. That means this variable works only inside the function where the
+                declaration is made.
+            </p>
 
+            <p class="pb-4">Also the var is hoisted like global function. Then it can access before declared in code.
+                But it will
+                initialized with <b> undefined </b></p>
+
+            <p class="pb-4"><b>let:</b> let syntax is as like as var. But let is a Block scope. Let only work on a block
+                where it
+                declare. Outside it is not accessible. <br>
+                Also let is not hoisted like var. It not accessible before initialized. And let variable can not
+                re-declared. But possible to reassign value.
+            </p>
+
+            <p><b>const:</b> const is a block scope like as let. It not possible to redeclare and reassign. Also it is
+                not hoisted. <br>
+                But possible to modify array and object properties.
+            </p>
+
+            <h2 class="text-4xl font-semibold my-5">2. Tell us the use cases of null and undefined </h2>
+
+            <p>In javascript <b>null</b> and <b>undefined</b> perform absence value. And both return falsely value. But
+                they used to sometime different purpose.</p>
+
+            <p class="py-4"><b>null:</b> is used for a variable or object that have no value. Also it can use for a
+                placeholder, that
+                will be assigned later. Sometime null use for check condition and comparisons.</p>
+
+            <p><b>undefined:</b> indicates that a variable or object property has not been initialized or a function not
+                returned any value.</p>
+            <p>If trying to an object that does not exit, it returns undefined</p>
+            <h2 class="text-4xl font-semibold my-5">What do you mean by REST API? </h2>
+            <p>REST API stands for: <b>Representational State Transfer Application Programming Interface</b></p>
+            <p>REST API used for various purposes. Like web services and mobile applications. API is simplicity,
+                scalability and compatibility with HTTP protocol, making popular choice for building modern web apps and
+                services.</p>
+        </div>
     </main>
 
 </body>
