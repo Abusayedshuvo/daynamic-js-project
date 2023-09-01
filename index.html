@@ -11,6 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>PH Tube | Assignment 6</title>
     <link rel="shortcut icon" href="img/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -28,25 +29,25 @@
                     </label>
                     <ul tabindex="0"
                         class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-
+                        <button onclick="sortByViews()" class="sort-btn btn px-7">Sort by view</button>
                     </ul>
                 </div>
-                <a class="btn btn-ghost normal-case text-xl">
+                <a href="index.html" class="btn btn-ghost normal-case text-xl">
                     <img src="img/Logo.png" alt="">
                 </a>
             </div>
             <div class="navbar-center hidden lg:flex">
-                <a class="btn px-7">Sort by view</a>
+                <button onclick="sortByViews()" class="sort-btn btn px-7">Sort by view</button>
             </div>
             <div class="navbar-end">
-                <a class="btn bg-rose-500 text-white px-7">Blog</a>
+                <a href="blog.html" class="btn bg-rose-500 text-white px-7">Blog</a>
             </div>
         </div>
         <hr>
         <!-- navbar end -->
     </header>
 
-    <main>
+    <main class="px-8 lg:px-0">
         <!-- tabs start -->
         <div class="container mx-auto text-center mt-10">
             <div class="text-center" id="tabs">
@@ -57,7 +58,8 @@
 
         <!-- main card area start -->
         <div class="container mx-auto py-20">
-            <div class="grid grid-cols-4 gap-8 justify-center mx-auto" id="cards">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center mx-auto"
+                id="cards">
 
             </div>
         </div>

@@ -8,21 +8,51 @@ const getCategories = async () => {
   const tabs = document.getElementById("tabs");
   categories.forEach((category) => {
     const span = document.createElement("span");
-    span.innerHTML = `<button onclick="singleData('${category.category_id}')" class="cat-btn btn mx-4 active:bg-rose-500"> ${category.category} </button>`;
+    span.innerHTML = `<button onclick="singleData('${category.category_id}', this)" class="cat-btn btn m-4"> ${category.category} </button>`;
     tabs.appendChild(span);
   });
 };
 
+let catId = 1000;
+let sort = false;
+
 // get single data from API
-const singleData = async (id) => {
+const singleData = async (id, button) => {
+  // Fetch data
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${id}`
   );
   const data = await response.json();
-  const singleData = data.data;
+  const catData = data.data;
+
+  // Active Button By Onclick
+  if (button !== undefined) {
+    const catBtns = document.querySelectorAll(".cat-btn");
+    catBtns.forEach((catBtn) => {
+      catBtn.classList.remove("active");
+    });
+    button.classList.add("active");
+  }
+
+  // Data sort
+  catId = id;
+  if (sort) {
+    catData.sort((a, b) => {
+      let aViews = nFormat(a.others.views);
+      let bViews = nFormat(b.others.views);
+      if (aViews > bViews) {
+        return 1;
+      }
+      if (aViews < bViews) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
   const cardContainer = document.getElementById("cards");
   cardContainer.innerHTML = "";
-  if (singleData.length === 0) {
+  if (catData.length === 0) {
     const div = document.createElement("div");
     div.classList.add("col-start-2", "col-span-2");
     div.innerHTML = `
@@ -34,12 +64,12 @@ const singleData = async (id) => {
     cardContainer.appendChild(div);
   }
 
-  singleData.forEach((card) => {
+  catData.forEach((card) => {
     const div = document.createElement("div");
     div.classList = `single-card`;
     div.innerHTML = `
     <div class="relative"> 
-    <img src="${card.thumbnail}" alt="">
+    <img class="w-full h-56 rounded-lg" src="${card.thumbnail}" alt="">
     <span>${
       card.others.posted_date
         ? `<span class="bg-black rounded-lg p-2 text-white absolute text-sm right-4 bottom-4">${
@@ -80,11 +110,20 @@ const secToHour = (totalSeconds) => {
   return { hrs: hour, min: minutes };
 };
 
-// Add Active
-// const addActive = (event) => {
-//   const btn = event.target;
-//   btn.classList.toggle("active");
-// };
+// N Formatter
+const nFormat = (num) => {
+  return num.slice(0, -1) * 1000;
+};
+
+// Sort By view
+const sortByViews = () => {
+  const sortBtn = document.querySelectorAll(".sort-btn");
+  sortBtn.forEach((btn) => {
+    btn.classList.toggle("sort-active");
+  });
+  sort = !sort;
+  singleData(catId);
+};
 
 singleData("1000");
 getCategories();
