@@ -8,9 +8,8 @@ const getCategories = async () => {
   const tabs = document.getElementById("tabs");
   categories.forEach((category) => {
     const span = document.createElement("span");
-    span.innerHTML = `<button onclick="singleData('${category.category_id}')" class="btn mx-4 active:bg-rose-500"> ${category.category} </button>`;
+    span.innerHTML = `<button onclick="singleData('${category.category_id}')" class="cat-btn btn mx-4 active:bg-rose-500"> ${category.category} </button>`;
     tabs.appendChild(span);
-    // console.log(category);
   });
 };
 
@@ -23,6 +22,18 @@ const singleData = async (id) => {
   const singleData = data.data;
   const cardContainer = document.getElementById("cards");
   cardContainer.innerHTML = "";
+  if (singleData.length === 0) {
+    const div = document.createElement("div");
+    div.classList.add("col-start-2", "col-span-2");
+    div.innerHTML = `
+      <div class="text-center ">  
+        <img class="mx-auto pb-5" src="${`img/Icon.png`}" alt="">
+      <h1 class="text-4xl">Oops!! Sorry, There is no content here</h1>
+      </div>
+      `;
+    cardContainer.appendChild(div);
+  }
+
   singleData.forEach((card) => {
     const div = document.createElement("div");
     div.classList = `single-card`;
@@ -68,6 +79,12 @@ const secToHour = (totalSeconds) => {
   const minutes = totalMin % 60;
   return { hrs: hour, min: minutes };
 };
+
+// Add Active
+// const addActive = (event) => {
+//   const btn = event.target;
+//   btn.classList.toggle("active");
+// };
 
 singleData("1000");
 getCategories();
